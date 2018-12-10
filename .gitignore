@@ -1,7 +1,9 @@
 # OS X
 .DS_Store*
 Icon?
+.idea/**/*
 ._*
+package-lock.json
 
 # Windows
 Thumbs.db

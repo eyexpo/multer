@@ -9,7 +9,7 @@ export class FileHasher {
 
   public static create = () => {
     return new FileHasher(crypto.createHash('sha256'), crypto.createHash('sha256'), 0);
-  }
+  };
 
   /**
    *

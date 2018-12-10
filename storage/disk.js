@@ -1,8 +1,13 @@
+import { FileHasher } from '../hasher/FileHasher.class';
+
 var fs = require('fs')
 var os = require('os')
 var path = require('path')
 var crypto = require('crypto')
 var mkdirp = require('mkdirp')
+
+// todo re-instansiate this in _handleFile
+const hasher = fileHasher.create()
 
 function getFilename (req, file, cb) {
   crypto.pseudoRandomBytes(16, function (err, raw) {
@@ -39,6 +44,9 @@ DiskStorage.prototype._handleFile = function _handleFile (req, file, cb) {
 
       file.stream.pipe(outStream)
       outStream.on('error', cb)
+      file.stream.on('data', () => {
+        console.log('DISK - got data chunk entry point')
+      })
       outStream.on('finish', function () {
         cb(null, {
           destination: destination,
